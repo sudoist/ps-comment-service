@@ -36,10 +36,13 @@ func CreateComment() gin.HandlerFunc {
             return
         }
 
+	var generateId = primitive.NewObjectID()
+
         newComment := models.Comment{
+            Id:            generateId,
             ContentId:     comment.ContentId,
-            UserId: comment.UserId,
-            Comment: comment.Comment,
+            UserId:        comment.UserId,
+            Comment:       comment.Comment,
         }
 
         result, err := commentCollection.InsertOne(ctx, newComment)
